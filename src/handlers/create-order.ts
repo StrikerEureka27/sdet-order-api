@@ -1,6 +1,7 @@
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
 
 import { createOrder } from "../services/create-order.js";
+import { publishEvent } from "../events/eventbridge.js";
 
 export async function handler(
 	event: APIGatewayProxyEventV2,
@@ -22,6 +23,8 @@ export async function handler(
 		productId,
 		quantity,
 	});
+
+	await publishEvent("order.created", order);
 
 	return {
 		statusCode: 202,

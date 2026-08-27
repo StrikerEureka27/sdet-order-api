@@ -104,3 +104,26 @@ npx serverless package
 > Serverless package creates a deployment package of your service for deployment.
 
 
+AWS configuration and dependencies
+
+base dependencies
+```bash
+npm install @aws-sdk/client-eventbridge
+mkdir -p src/events
+touch src/events/eventbridge.ts
+```
+
+How it works
+
+1. The `createOrder` handler creates an order and publishes an EventBridge event
+2. The event is sent to the default EventBridge bus
+3. The event can be consumed by other services via EventBridge rules
+4. Be sure IAM permissions are configured correctly for EventBridge access
+
+Updated serverless stage to perform:
+
+```bash
+npx serverless deploy --stage "dev | staging | prod"
+```
+
+

@@ -4,7 +4,18 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
-  stage: dev
+  stage: ${opt:stage, 'dev'}
+
+  environment:
+    EVENT_BUS_NAME: default
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - events:PutEvents
+          Resource: "*"
 
 functions:
   createOrder:
