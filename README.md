@@ -74,4 +74,33 @@ Update package.json scripts
 }
 ```
 
+Install Serverless and Lambda types
+
+```bash
+npm install -D serverless @types/aws-lambda
+```
+
+serverless docs: https://www.serverless.com/framework/docs
+
+create lambda handler using serverless framework
+
+create serverless.yml
+```bash
+touch serverless.yml
+```
+
+Serverless print
+```bash
+npx serverless print
+```
+
+> Serverless print shows the compiled configuration of the service.
+
+Serverless package
+```bash
+npx serverless package
+```
+
+> Serverless package creates a deployment package of your service for deployment.
+
 

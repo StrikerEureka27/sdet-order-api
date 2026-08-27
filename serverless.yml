@@ -1,0 +1,15 @@
+service: order-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  stage: dev
+
+functions:
+  createOrder:
+    handler: src/handlers/create-order.handler
+    events:
+      - httpApi:
+          path: /orders
+          method: post

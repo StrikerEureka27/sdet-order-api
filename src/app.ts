@@ -1,4 +1,5 @@
 import express from "express";
+import { createOrder } from "./services/create-order.js";
 
 export const app = express();
 
@@ -19,12 +20,10 @@ app.post("/orders", (req, res) => {
 		});
 	}
 
-	const order = {
-		id: crypto.randomUUID(),
+	const order = createOrder({
 		productId,
 		quantity,
-		status: "RECEIVED",
-	};
+	});
 
 	return res.status(202).json(order);
 });
