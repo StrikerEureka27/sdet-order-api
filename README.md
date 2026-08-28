@@ -127,3 +127,17 @@ npx serverless deploy --stage "dev | staging | prod"
 ```
 
 
+### Add a Lambda integration test and mock EventBridge
+
+```bash
+touch tests/create-order-lambda.test.ts
+```
+
+
+### AWS CLI commands
+
+```bash
+aws --version
+aws sts get-caller-identity
+```
+

@@ -19,6 +19,4 @@ export async function publishEvent(detailType: string, detail: unknown) {
 	if (response.FailedEntryCount && response.FailedEntryCount > 0) {
 		throw new Error("Failed to publish EventBridge event");
 	}
-
-	return response;
 }

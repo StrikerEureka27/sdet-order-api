@@ -1,12 +1,26 @@
-import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
+import type {
+	APIGatewayProxyEventV2,
+	APIGatewayProxyStructuredResultV2,
+} from "aws-lambda";
 
 import { createOrder } from "../services/create-order.js";
 import { publishEvent } from "../events/eventbridge.js";
 
 export async function handler(
 	event: APIGatewayProxyEventV2,
-): Promise<APIGatewayProxyResultV2> {
-	const body = event.body ? JSON.parse(event.body) : {};
+): Promise<APIGatewayProxyStructuredResultV2> {
+	let body;
+
+	try {
+		body = event.body ? JSON.parse(event.body) : {};
+	} catch {
+		return {
+			statusCode: 400,
+			body: JSON.stringify({
+				message: "Invalid JSON body",
+			}),
+		};
+	}
 
 	const { productId, quantity } = body;
 
