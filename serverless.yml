@@ -9,6 +9,9 @@ provider:
   environment:
     EVENT_BUS_NAME: default
 
+    ORDERS_TABLE:
+      Fn::ImportValue: order-status-table-name-${sls:stage}
+
   iam:
     role:
       statements:
@@ -17,6 +20,12 @@ provider:
             - events:PutEvents
           Resource: "*"
 
+        - Effect: Allow
+          Action:
+            - dynamodb:GetItem
+          Resource:
+            Fn::ImportValue: order-status-table-arn-${sls:stage}
+
 functions:
   createOrder:
     handler: src/handlers/create-order.handler
@@ -24,3 +33,10 @@ functions:
       - httpApi:
           path: /orders
           method: post
+
+  getOrder:
+    handler: src/handlers/get-order.handler
+    events:
+      - httpApi:
+          path: /orders/{id}
+          method: get

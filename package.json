@@ -33,7 +33,9 @@
     "vitest": "^4.1.11"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1124.0",
     "@aws-sdk/client-eventbridge": "^3.1120.0",
+    "@aws-sdk/lib-dynamodb": "^3.1124.0",
     "express": "^5.2.1"
   }
 }
